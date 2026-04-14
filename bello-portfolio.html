@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bello Ahmed Oluwatosin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0d0e0f;
+  --paper: #f5f0e8;
+  --cream: #ede8dc;
+  --warm: #e8e0d0;
+  --accent: #c8320a;
+  --accent2: #1a6b3c;
+  --gold: #b8860b;
+  --muted: #7a7060;
+  --rule: rgba(13,14,15,0.12);
+  --rule-strong: rgba(13,14,15,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cur { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform .1s; }
+#cur-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+#cur-ring { width: 32px; height: 32px; border: 1px solid rgba(200,50,10,0.35); border-radius: 50%; transition: width .25s, height .25s; }
+body { cursor: none; }
+
+/* NEWSPAPER HEADER BAR */
+.masthead-top {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.masthead-date { color: rgba(245,240,232,0.5); }
+.masthead-tag {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 2px 10px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+
+/* NAV */
+nav {
+  padding: 0 48px;
+  border-bottom: 3px double var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 100;
+}
+.nav-brand {
+  padding: 18px 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  border-right: 1px solid var(--rule-strong);
+  padding-right: 24px;
+  margin-right: 24px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  flex: 1;
+}
+.nav-links li a {
+  display: block;
+  padding: 18px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-right: 1px solid var(--rule);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links li a:hover { color: var(--accent); background: var(--cream); }
+.nav-cta {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  border-left: 1px solid var(--rule-strong);
+}
+.nav-cta a {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta a:hover { background: var(--accent); }
+
+/* HERO — editorial broadsheet layout */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  border-bottom: 3px double var(--ink);
+  min-height: 82vh;
+}
+.hero-divider { background: var(--rule-strong); }
+
+.hero-left {
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: none;
+}
+.hero-kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-kicker::before { content: '■'; font-size: 8px; }
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(48px, 5.5vw, 80px);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.hero-headline .name-red { color: var(--accent); }
+.hero-headline .italic { font-style: italic; font-weight: 400; }
+
+.hero-rule { height: 3px; background: var(--ink); margin: 32px 0; }
+
+.hero-deck {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 480px;
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+}
+
+.hero-bottom {
+  margin-top: auto;
+  padding-top: 40px;
+}
+.byline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-top: 1px solid var(--rule-strong);
+  padding-top: 16px;
+  display: flex;
+  gap: 24px;
+}
+.byline strong { color: var(--ink); }
+
+.hero-right {
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.pull-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(22px, 2.5vw, 32px);
+  line-height: 1.4;
+  color: var(--ink);
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  padding: 24px 0;
+  letter-spacing: -0.01em;
+}
+.pull-quote span { color: var(--accent); }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.stat-box {
+  background: var(--cream);
+  padding: 24px;
+  border: 1px solid var(--rule);
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+}
+.stat-num sub { font-size: 18px; color: var(--accent); font-style: italic; }
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.interest-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.interest-pill {
+  padding: 6px 14px;
+  border: 1px solid var(--rule-strong);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.interest-pill:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.interest-pill.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+
+/* SECTIONS */
+.section-wrap {
+  padding: 72px 48px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.col-rule {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.col-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 8px;
+  border-top: 2px solid var(--ink);
+  position: sticky;
+  top: 64px;
+}
+.col-label .num { display: block; font-size: 32px; font-family: 'Playfair Display', serif; font-weight: 900; color: var(--ink); letter-spacing: -0.04em; margin-bottom: 4px; }
+
+.section-h {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 48px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+.section-h em { font-style: italic; font-weight: 400; color: var(--muted); }
+
+/* ABOUT */
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.about-col p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.about-col p strong { color: var(--ink); font-weight: 500; }
+
+.thesis-box {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 28px;
+  margin-top: 4px;
+}
+.thesis-box .t-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+  margin-bottom: 12px;
+}
+.thesis-box .t-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--paper);
+}
+.thesis-box .t-text span { color: var(--gold); }
+
+/* CREDENTIALS */
+.cred-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 12px;
+}
+.cred-card {
+  padding: 24px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  position: relative;
+  transition: background 0.2s;
+}
+.cred-card:hover { background: var(--warm); }
+.cred-degree {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.cred-school {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--accent2);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.cred-note {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+}
+.cred-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent2);
+}
+
+/* VENTURES */
+.venture-stack { display: flex; flex-direction: column; gap: 3px; }
+.venture-card {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-left: 4px solid transparent;
+  transition: all 0.25s;
+}
+.venture-card:hover { background: var(--warm); border-left-color: var(--accent); }
+.venture-card.primary { border-left-color: var(--accent); background: var(--ink); color: var(--paper); }
+.venture-card.primary .v-sector { color: rgba(245,240,232,0.45); }
+.venture-card.primary .v-name { color: var(--paper); }
+.venture-card.primary .v-desc { color: rgba(245,240,232,0.6); }
+
+.v-icon { font-size: 36px; text-align: center; }
+.v-sector {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.venture-card.primary .v-sector { color: var(--gold); }
+.v-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.v-desc { font-size: 12px; color: var(--muted); line-height: 1.7; font-weight: 300; }
+.v-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent2);
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid var(--accent2);
+  padding: 4px 10px;
+}
+.venture-card.primary .v-status { border-color: var(--gold); color: var(--gold); }
+
+/* INTERESTS */
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.interest-card {
+  padding: 28px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  transition: all 0.2s;
+}
+.interest-card:hover { background: var(--warm); transform: translateY(-2px); }
+.int-icon { font-size: 28px; margin-bottom: 14px; }
+.int-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.int-desc { font-size: 12px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+/* CONTACT */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.contact-intro {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+.contact-note { font-size: 13px; color: var(--muted); line-height: 1.9; font-weight: 300; }
+.contact-note strong { color: var(--ink); font-weight: 500; }
+
+.contact-items { display: flex; flex-direction: column; gap: 3px; }
+.c-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  text-decoration: none;
+  transition: all 0.2s;
+  color: var(--ink);
+}
+.c-item:hover { background: var(--ink); color: var(--paper); }
+.c-item:hover .c-label { color: rgba(245,240,232,0.5); }
+.c-item:hover .c-val { color: var(--paper); }
+.c-icon { font-size: 18px; width: 28px; flex-shrink: 0; }
+.c-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: 1;
+}
+.c-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+.c-arrow { color: var(--accent); font-size: 14px; opacity: 0; transition: opacity 0.2s, transform 0.2s; transform: translateX(-4px); }
+.c-item:hover .c-arrow { opacity: 1; transform: translateX(0); }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+.f-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.f-name span { color: var(--accent); font-style: italic; }
+.f-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.4);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.f-right {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(245,240,232,0.35);
+  text-align: right;
+}
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.anim-1 { opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+.anim-2 { opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
+.anim-3 { opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards; }
+.anim-4 { opacity: 0; animation: fadeUp 0.7s ease 0.7s forwards; }
+.anim-5 { opacity: 0; animation: fadeUp 0.7s ease 0.9s forwards; }
+
+/* Decorative rule style */
+hr.fancy { border: none; border-top: 3px double var(--rule-strong); margin: 32px 0; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .masthead-top { padding: 8px 24px; display: none; }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-divider { display: none; }
+  .hero-left, .hero-right { padding: 48px 24px; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .section-wrap { padding: 56px 24px; }
+  .col-rule { grid-template-columns: 1fr; gap: 24px; }
+  .col-label { position: static; }
+  .about-body { grid-template-columns: 1fr; }
+  .cred-grid { grid-template-columns: 1fr; }
+  .venture-card { grid-template-columns: 1fr; gap: 16px; }
+  .interest-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+  .f-right { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur-dot" style="position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);width:6px;height:6px;background:var(--accent);border-radius:50%;"></div>
+<div class="cur" id="cur-ring" style="position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);width:32px;height:32px;border:1px solid rgba(200,50,10,0.3);border-radius:50%;transition:width .25s,height .25s;"></div>
+
+<!-- MASTHEAD TOP BAR -->
+<div class="masthead-top">
+  <span>Bello Ahmed Oluwatosin — Personal Portfolio</span>
+  <span class="masthead-date" id="mdate"></span>
+  <span class="masthead-tag">Lagos · Nigeria</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">B.A.O</a>
+  <ul class="nav-links">
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#credentials">Education</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#interests">Interests</a></li>
+  </ul>
+  <div class="nav-cta"><a href="#contact">Get in Touch</a></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-kicker anim-1">Engineer · Founder · Financial Thinker</div>
+      <h1 class="hero-headline anim-2">
+        Bello<br>
+        <span class="name-red">Ahmed</span><br>
+        <span class="italic">Oluwatosin.</span>
+      </h1>
+      <div class="hero-rule anim-3"></div>
+      <p class="hero-deck anim-4">
+        Founder & Managing Director of BTech Engineering. Building infrastructure-grade businesses at the intersection of engineering and finance — and proving great companies can be built in Nigeria, for the world.
+      </p>
+    </div>
+    <div class="hero-bottom anim-5">
+      <div class="byline">
+        <span><strong>Status</strong> — Active</span>
+        <span><strong>Base</strong> — Lagos, Nigeria</span>
+        <span><strong>Focus</strong> — Energy · Fintech · Startups</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-right">
+    <div class="pull-quote anim-2">
+      "Great businesses can be built in Nigeria — <span>engineered here, scaled to the world.</span>"
+    </div>
+    <div class="hero-stats anim-3">
+      <div class="stat-box">
+        <div class="stat-num">2<sub>+</sub></div>
+        <div class="stat-label">Active Ventures</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3<sub>°</sub></div>
+        <div class="stat-label">Academic Credentials</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Ambition</div>
+      </div>
+      <div class="stat-box" style="background: var(--ink);">
+        <div class="stat-num" style="color: var(--paper);">NG<sub style="color: var(--gold);">🇳🇬</sub></div>
+        <div class="stat-label" style="color: rgba(245,240,232,0.5);">Nigeria First</div>
+      </div>
+    </div>
+    <div class="interest-strip anim-4">
+      <span class="interest-pill active">Clean Energy</span>
+      <span class="interest-pill">Equity Markets</span>
+      <span class="interest-pill">Fin. Engineering</span>
+      <span class="interest-pill">Startups</span>
+      <span class="interest-pill">Project Finance</span>
+      <span class="interest-pill">NSE</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="col-rule">
+    <div class="col-label reveal">
+      <span class="num">01</span>
+      Profile
+    </div>
+    <div class="reveal">
+      <h2 class="section-h">Engineer first.<br><em>The rest follows.</em></h2>
+      <div class="about-body">
+        <div class="about-col">
+          <p>
+            I'm <strong>Bello Ahmed Oluwatosin</strong> — a graduate of Electrical and Electronics Engineering from the University of Lagos, now operating at the intersection of <strong>engineering, business, and financial markets</strong>.
+          </p>
+          <p>
+            As <strong>Founder and Managing Director of BTech Engineering</strong>, I lead a company focused on delivering sustainable, cost-effective energy solutions across Nigeria — from solar systems to smart energy platforms like <strong>PowerLink™</strong>.
+          </p>
+          <p>
+            I'm currently pursuing an <strong>MSc in Financial Engineering</strong>, adding rigorous quantitative and financial modelling tools to my engineering foundation. I also hold a <strong>Mini MBA</strong>, equipping me to translate technical vision into business strategy.
+          </p>
+          <p>
+            I've been part of several startups and businesses, bringing both operational and strategic value — from product management to go-to-market execution. I thrive in environments where <strong>complex engineering meets capital markets thinking</strong>.
+          </p>
+        </div>
+        <div class="about-col">
+          <div class="thesis-box">
+            <div class="t-label">Investment Thesis</div>
+            <div class="t-text">
+              Nigeria's core engineering challenges — energy, logistics, safety — are not problems to manage. They are <span>investable opportunities</span> waiting for the right builder to unlock them.
+            </div>
+          </div>
+          <p style="margin-top: 20px;">
+            I follow the <strong>Nigerian equity markets</strong> closely and read financial news daily — not just as an investor, but as a builder who understands that attracting capital is as strategic as building the product itself.
+          </p>
+          <p>
+            My thesis: the next generation of great African businesses will be built by people who can <strong>engineer the solution and structure the financing</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDENTIALS -->
+<div class="section-wrap" id="credentials">
+  <div class="col-rule">
+    <div class="col-label reveal">
+      <span class="num">02</span>
+      Education
+    </div>
+    <div class="reveal">
+      <h2 class="section-h">Academic<br><em>foundation.</em></h2>
+      <div class="cred-grid">
+        <div class="cred-card">
+          <div class="cred-badge" style="background: var(--accent);"></div>
+          <div class="cred-degree">MSc Financial Engineering</div>
+          <div class="cred-school">In Progress</div>
+          <div class="cred-note">Quantitative finance, derivatives pricing, risk modelling, and financial instruments — applied to real infrastructure and engineering projects.</div>
+        </div>
+        <div class="cred-card">
+          <div class="cred-badge" style="background: var(--gold);"></div>
+          <div class="cred-degree">Mini MBA</div>
+          <div class="cred-school">Business & Strategy</div>
+          <div class="cred-note">Core business management, corporate strategy, financial analysis, and leadership — bridging the gap between technical expertise and executive decision-making.</div>
+        </div>
+        <div class="cred-card" style="grid-column: 1 / -1;">
+          <div class="cred-badge" style="background: var(--accent2);"></div>
+          <div class="cred-degree">B.Eng. Electrical & Electronics Engineering</div>
+          <div class="cred-school">University of Lagos (UNILAG)</div>
+          <div class="cred-note">Foundation in power systems, circuit design, signal processing, and engineering fundamentals. The bedrock of every venture since — understanding how things actually work.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VENTURES -->
+<div class="section-wrap" id="ventures">
+  <div class="col-rule">
+    <div class="col-label reveal">
+      <span class="num">03</span>
+      Ventures
+    </div>
+    <div class="reveal">
+      <h2 class="section-h">Things I've<br><em>built.</em></h2>
+      <div class="venture-stack">
+        <div class="venture-card primary">
+          <div class="v-icon">⚡</div>
+          <div>
+            <div class="v-sector">Energy · Engineering</div>
+            <div class="v-name">BTech Engineering</div>
+            <div class="v-desc">
+              Founded and currently leading BTech Engineering as Founder & MD — a full-service energy solutions company specialising in the design, installation, and maintenance of solar power systems for residential, commercial, and industrial clients. Home of the PowerLink™ smart energy platform.
+            </div>
+          </div>
+          <div class="v-status">Founder & MD</div>
+        </div>
+        <div class="venture-card">
+          <div class="v-icon">☀️</div>
+          <div>
+            <div class="v-sector">Product · SaaS · Clean Energy</div>
+            <div class="v-name">BTech Energi / PowerLink™</div>
+            <div class="v-desc">
+              PowerLink™ is BTech's smart energy management platform — enabling real-time monitoring, predictive load management, and energy analytics for solar-powered homes and businesses across Nigeria.
+            </div>
+          </div>
+          <div class="v-status">Active</div>
+        </div>
+        <div class="venture-card">
+          <div class="v-icon">🛡️</div>
+          <div>
+            <div class="v-sector">Safety · Hardware · Consumer</div>
+            <div class="v-name">CarrySafe</div>
+            <div class="v-desc">
+              CarrySafe is an engineering-led safety product venture — solving a core personal and asset protection problem in Nigeria through smart, accessible safety hardware solutions.
+            </div>
+          </div>
+          <div class="v-status">Active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTERESTS -->
+<div class="section-wrap" id="interests">
+  <div class="col-rule">
+    <div class="col-label reveal">
+      <span class="num">04</span>
+      Interests
+    </div>
+    <div class="reveal">
+      <h2 class="section-h">What drives<br><em>my thinking.</em></h2>
+      <div class="interest-grid">
+        <div class="interest-card">
+          <div class="int-icon">📈</div>
+          <div class="int-title">Nigerian Equity Markets</div>
+          <div class="int-desc">Daily reader of financial news and close follower of the Nigerian Stock Exchange. Watching how capital flows, how companies are valued, and identifying where engineering-led businesses can attract institutional funding.</div>
+        </div>
+        <div class="interest-card">
+          <div class="int-icon">🏗️</div>
+          <div class="int-title">Engineering Startups</div>
+          <div class="int-desc">Deeply interested in Nigerian and African startups that solve core infrastructure and engineering problems — energy, water, logistics, safety. The belief: the hardest problems are the biggest opportunities.</div>
+        </div>
+        <div class="interest-card">
+          <div class="int-icon">💰</div>
+          <div class="int-title">Project Finance & Capital</div>
+          <div class="int-desc">Fascinated by how capital is attracted to engineering projects — from development finance institutions (DFIs) to equity raises, blended finance structures, and private infrastructure investment in Nigeria.</div>
+        </div>
+        <div class="interest-card">
+          <div class="int-icon">🌍</div>
+          <div class="int-title">Nigeria-to-World Businesses</div>
+          <div class="int-desc">A firm believer that world-class businesses can be built in Nigeria. Interested in founders and models that start with Nigerian problems and scale globally — not the other way around.</div>
+        </div>
+        <div class="interest-card">
+          <div class="int-icon">🔋</div>
+          <div class="int-title">Clean Energy Access</div>
+          <div class="int-desc">Solar, storage, and distributed energy systems as the path to reliable power for Nigerian homes and businesses. Both a personal mission and a commercial opportunity at massive scale.</div>
+        </div>
+        <div class="interest-card">
+          <div class="int-icon">📚</div>
+          <div class="int-title">Financial Engineering</div>
+          <div class="int-desc">Applying quantitative finance tools — derivatives, structured products, risk modelling — to engineering project valuation and infrastructure investment in emerging markets.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-wrap" id="contact">
+  <div class="col-rule">
+    <div class="col-label reveal">
+      <span class="num">05</span>
+      Contact
+    </div>
+    <div class="reveal">
+      <h2 class="section-h">Let's talk<br><em>business.</em></h2>
+      <div class="contact-layout">
+        <div>
+          <div class="contact-intro">
+            If you're building something in Nigeria — or looking to finance one — I want to hear about it.
+          </div>
+          <p class="contact-note">
+            Open to conversations around <strong>energy startups, engineering ventures, investment opportunities, and partnerships</strong> that are creating real value in Nigeria. <br><br>
+            Based in <strong>Lagos, Nigeria</strong>. Available for consulting, co-founder conversations, advisory roles, and speaking engagements on engineering, energy, and startup financing.
+          </p>
+        </div>
+        <div class="contact-items">
+          <a href="mailto:btechenergi@gmail.com" class="c-item">
+            <span class="c-icon">✉</span>
+            <span class="c-label">Email</span>
+            <span class="c-val">btechenergi@gmail.com</span>
+            <span class="c-arrow">→</span>
+          </a>
+          <a href="https://wa.link/bhwjnh" target="_blank" class="c-item">
+            <span class="c-icon">💬</span>
+            <span class="c-label">WhatsApp</span>
+            <span class="c-val">+234 905 294 7707</span>
+            <span class="c-arrow">→</span>
+          </a>
+          <a href="https://calendly.com/bello0/let-s-chat" target="_blank" class="c-item">
+            <span class="c-icon">📅</span>
+            <span class="c-label">Book a Call</span>
+            <span class="c-val">Schedule on Calendly</span>
+            <span class="c-arrow">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/boluwatosin" target="_blank" class="c-item">
+            <span class="c-icon">🔗</span>
+            <span class="c-label">LinkedIn</span>
+            <span class="c-val">/in/boluwatosin</span>
+            <span class="c-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-name">Bello Ahmed <span>Oluwatosin</span></div>
+    <div class="f-sub">Founder & MD · BTech Engineering · Lagos, Nigeria</div>
+  </div>
+  <div class="f-right">
+    © 2025<br>
+    Built for the World<br>
+    from Lagos 🇳🇬
+  </div>
+</footer>
+
+<script>
+// Date
+const d = new Date();
+document.getElementById('mdate').textContent = d.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// Cursor
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let rx = 0, ry = 0, cx = 0, cy = 0;
+document.addEventListener('mousemove', e => {
+  cx = e.clientX; cy = e.clientY;
+  dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
+});
+(function tick() {
+  rx += (cx - rx) * 0.1; ry += (cy - ry) * 0.1;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a, .venture-card, .interest-card, .cred-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width = '52px'; ring.style.height = '52px'; dot.style.background = 'var(--accent2)'; });
+  el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; dot.style.background = 'var(--accent)'; });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
